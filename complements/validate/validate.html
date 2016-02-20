@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulario de contacto</title>
+
+  <meta charset="utf-8">
+  <meta name="description" content="Formulario de contacto">
+
+  <link rel="stylesheet" href="css/estilo.css">
+
+  <script src="js/jquery-1.8.2.min.js"></script>
+  <script src="js/jquery.validate.js"></script>
+  <script src="js/additional-methods.js"></script>
+  <script src="js/messages_es.js"></script>
+ </head>
+<body>
+<div class="contenido">
+   <h1>Formulario de contacto</h1>
+	<form id="formulario" action="" method="post" novalidate>
+	<fieldset>
+          <legend>Información de contacto</legend>
+	     <label for="nombre">Nombre  *</label> <input type="text" id="nombre" name="nombre">
+	     <div class="clear"> </div>
+	     <label for="apellidos">Apellidos  *</label> <input type="text" id="apellidos" name="apellidos">
+	     <div class="clear"> </div>
+	     <label for="telefono">Teléfono  *</label><input type="tel" id="telefono" name="telefono">
+	     <div class="clear"> </div>
+	     <label for="email">Email  *</label> <input type="email" id="email" name="email">
+	     <div class="clear"> </div>
+	     <label for="email2">Confirmar Email  *</label> <input type="email" id="email2" name="email2">
+	     <div class="clear"> </div>
+	     <label for="iban">Código IBAN *</label> <input type="text" id="iban" name="iban">
+	  </fieldset>
+	     <input class="enviar" type="submit" value="Enviar">
+	</form>
+<div class="clear"> </div>
+<p>Nota: Un código iban válido (extraido de Wikipedia) es ES7620770024003102575766. Podéis probar con el vuestro particular.</p>
+
+<script>
+$("#formulario").validate({
+    rules: {
+      nombre: {
+        required: true,
+        lettersonly: true
+      },
+      apellidos: {
+        required: true,
+        lettersonly: true
+      },
+      telefono: {
+        required: true,
+        digits: true,
+        minlength: 9,
+	maxlength: 9
+      },
+      email: {
+        required: true,
+	email: true,
+        //remote: "php/validar_email_db.php"
+      },
+      email2: {
+        required: true,
+        equalTo: email
+      },
+      
+      iban: {
+        required: true,
+        iban: true,
+	maxlength: 24 //Para España son 24
+	
+      }
+    },
+    messages: {
+      nombre: {
+        lettersonly: "Escribe sólo letras"
+      },
+
+      apellidos: {
+        lettersonly: "Escribe sólo letras"
+      },
+      email: {
+        remote: "Email ya está en uso."
+      },
+      iban: {
+        iban: "Introduzca un IBAN correcto (Para España 24 caracteres y empezando por ES)."
+      }
+    },
+    submitHandler: function() {
+      alert("formulario enviado");
+    }
+  });
+
+</script>
+
+
